@@ -307,6 +307,10 @@ public extension SKPhotoBrowser {
         return photos[index]
     }
     
+    @objc func savePhoto() {
+        
+    }
+    
     @objc func gotoPreviousPage() {
         jumpToPageAtIndex(currentPageIndex - 1)
     }

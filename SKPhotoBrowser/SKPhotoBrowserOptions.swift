@@ -17,6 +17,7 @@ public struct SKPhotoBrowserOptions {
     
     public static var displayToolbar: Bool = true
     public static var displayCounterLabel: Bool = true
+    public static var displaySaveButton: Bool = true
     public static var displayBackAndForwardButton: Bool = true
     public static var disableVerticalSwipe: Bool = false
     

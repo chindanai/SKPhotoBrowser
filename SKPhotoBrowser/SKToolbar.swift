@@ -13,6 +13,7 @@ private let bundle = Bundle(for: SKPhotoBrowser.self)
 
 class SKToolbar: UIToolbar {
     var toolCounterLabel: UILabel!
+    var toolSaveButton: UIBarButtonItem!
     var toolCounterButton: UIBarButtonItem!
     var toolPreviousButton: UIBarButtonItem!
     var toolNextButton: UIBarButtonItem!
@@ -33,6 +34,7 @@ class SKToolbar: UIToolbar {
         self.browser = browser
         
         setupApperance()
+        setupSaveButton()
         setupPreviousButton()
         setupNextButton()
         setupCounterLabel()
@@ -72,6 +74,10 @@ private extension SKToolbar {
         
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         var items = [UIBarButtonItem]()
+        if SKPhotoBrowserOptions.displaySaveButton {
+            items.append(toolSaveButton)
+        }
+        
         items.append(flexSpace)
         if browser.numberOfPhotos > 1 && SKPhotoBrowserOptions.displayBackAndForwardButton {
             items.append(toolPreviousButton)
@@ -91,6 +97,12 @@ private extension SKToolbar {
             items.append(toolActionButton)
         }
         setItems(items, animated: false)
+    }
+    
+    func setupSaveButton() {
+        let saveBtn = SKSaveButton(frame: frame)
+        saveBtn.addTarget(browser, action: #selector(SKPhotoBrowser.savePhoto), for: .touchUpInside)
+        toolSaveButton = UIBarButtonItem(customView: saveBtn)
     }
     
     func setupPreviousButton() {
@@ -140,6 +152,18 @@ class SKToolbarButton: UIButton {
 
 class SKPreviousButton: SKToolbarButton {
     let imageName = "btn_common_back_wh"
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        setup(imageName)
+    }
+}
+
+class SKSaveButton: SKToolbarButton {
+    let imageName = "save-file"
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
