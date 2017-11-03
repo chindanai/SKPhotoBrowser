@@ -56,8 +56,8 @@ class SKCloseButton: SKButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup(imageName)
-        showFrame = CGRect(x: margin, y: buttonTopOffset, width: size.width, height: size.height)
-        hideFrame = CGRect(x: margin, y: -20, width: size.width, height: size.height)
+        showFrame = CGRect(x: SKMesurement.screenWidth - size.width, y: buttonTopOffset, width: size.width, height: size.height)
+        hideFrame = CGRect(x: SKMesurement.screenWidth - size.width, y: -20, width: size.width, height: size.height)
     }
     
     override func updateFrame() {
