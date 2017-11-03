@@ -58,7 +58,7 @@ class SKToolbar: UIToolbar {
 
 private extension SKToolbar {
     func setupApperance() {
-        backgroundColor = UIColor.clear
+        backgroundColor = UIColor.black.withAlphaComponent(0.4)
         clipsToBounds = true
         isTranslucent = true
         setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
@@ -100,9 +100,11 @@ private extension SKToolbar {
     }
     
     func setupSaveButton() {
-        let saveBtn = SKSaveButton(frame: frame)
-        saveBtn.addTarget(browser, action: #selector(SKPhotoBrowser.savePhoto), for: .touchUpInside)
-        toolSaveButton = UIBarButtonItem(customView: saveBtn)
+        let image = UIImage(named: "SKPhotoBrowser.bundle/images/save-file",
+                            in: bundle, compatibleWith: nil) ?? UIImage()
+        let saveBtn = UIBarButtonItem.init(image: image, style: .plain, target: browser, action: #selector(SKPhotoBrowser.savePhoto))
+        toolSaveButton = saveBtn
+        toolSaveButton.tintColor = UIColor.white
     }
     
     func setupPreviousButton() {
